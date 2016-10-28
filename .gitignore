@@ -1,0 +1,7 @@
+package/
+testSocket/bin/
+testSocket/obj/
+GameOfLifeCase/bin/
+GameOfLifeCase/obj/
+ClientGameOfLife/bin/
+ClientGameOfLife/obj/
