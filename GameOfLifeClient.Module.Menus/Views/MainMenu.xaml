@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="GameOfLifeClient.Module.Menus.Views.MainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:views="clr-namespace:GameOfLifeClient.Module.Menus.Views"
+      xmlns:viewModels="clr-namespace:GameOfLifeClient.Module.Menus.ViewModels">
+    <Grid>
+        <StackPanel>
+            <Label Content="GAME OF LIFE" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Content="Create Server" Command="{Binding GoCreateMode}"/>
+            <Button Content="Join Server" Command="{Binding GoJoinMode}"/>
+            <Button Content="Quit" Command="{Binding ExitApplication}"/>
+        </StackPanel>
+            
+
+    </Grid>
+</UserControl>

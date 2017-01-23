@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="GameOfLifeClient.Module.Game.Views.MainViewGame"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:local="clr-namespace:GameOfLifeClient.Module.Game"
+             xmlns:c="clr-namespace:GameOfLifeClient.Module.Game.Converter"
+             xmlns:prism="http://prismlibrary.com/"
+             mc:Ignorable="d"
+             Width="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ItemsControl}},Path=ActualWidth}"
+             Height="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type ItemsControl}},Path=ActualHeight}"
+             >
+    <UserControl.Resources>
+        <c:Mult10Converter x:Key="Mult10Converter"/>
+        <PointCollectionConverter x:Key="test"/>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <local:InteractiveCommand Command="{Binding MousePressedCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseWheel">
+            <local:InteractiveCommand Command="{Binding MouseWheelCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseMove">
+            <local:InteractiveCommand Command="{Binding MouseMoveCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseRightButtonDown">
+            <local:InteractiveCommand Command="{Binding RightDownCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseRightButtonUp">
+            <local:InteractiveCommand Command="{Binding RightUpCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ItemsControl ItemsSource="{Binding Polygons}" Background="Black">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas RenderTransformOrigin="0.5,0.5">
+                        <Canvas.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="{Binding CenterX}" Y="{Binding CenterY}"/>
+                                <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
+                            </TransformGroup>
+                        </Canvas.RenderTransform>
+                    </Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Polygon Points="{Binding Points}" Fill="Gray" Stroke="Blue"></Polygon>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="GameOfLifeClient.Module.Menus.Views.JoinModeMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameOfLifeClient.Module.Menus.Views"
+             xmlns:regions="http://prismlibrary.com/"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <ListView ItemsSource="{Binding CurrentGameModes}" SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Name}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Path=NbJoueur}"/>
+                            <TextBlock Text="/"/>
+                            <TextBlock Text="{Binding Path=NbJoueurMax}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            <ItemsControl Grid.Column="1" regions:RegionManager.RegionName="RegionGameModeDetails"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Return" Command="{Binding Return}"/>
+            <Button Grid.Column="1" Content="Join" Command="{Binding Join}"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

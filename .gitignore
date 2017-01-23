@@ -5,3 +5,7 @@ GameOfLifeCase/bin/
 GameOfLifeCase/obj/
 ClientGameOfLife/bin/
 ClientGameOfLife/obj/
+*/bin/*
+*/obj/*
+.vs
+packages/

@@ -1,0 +1,8 @@
+﻿<Application x:Class="GameOfLifeClient.Module.Game.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GameOfLifeClient.Module.Game">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
