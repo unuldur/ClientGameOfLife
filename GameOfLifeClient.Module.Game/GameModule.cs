@@ -25,7 +25,7 @@ namespace GameOfLifeClient.Module.Game
         public void Initialize()
         {
             _container.RegisterType<IGridCellService, GridCellService>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<IPolygonService, PolygonService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IRectangleService, RectangleService>(new ContainerControlledLifetimeManager());
             _regionManager.RegisterViewWithRegion("MainRegion", () => _container.Resolve<MainViewGame>());
         }
     }

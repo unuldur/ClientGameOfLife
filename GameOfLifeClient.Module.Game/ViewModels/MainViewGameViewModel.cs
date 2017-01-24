@@ -19,8 +19,8 @@ namespace GameOfLifeClient.Module.Game.ViewModels
 {
     public class MainViewGameViewModel : INotifyPropertyChanged
     {
-        private IPolygonService _polygonService;
-        public Polygons Polygons { get; set; }
+        private IRectangleService _rectangleService;
+        public Rectangles Rectangles { get; set; }
         public double Scale { get; private set; }
         public ICommand MousePressedCommand { get; private set; }
         public ICommand MouseWheelCommand { get; private set; }
@@ -32,10 +32,10 @@ namespace GameOfLifeClient.Module.Game.ViewModels
         public double CenterX { get; private set; }
         public double CenterY { get; private set; }
 
-        public MainViewGameViewModel(IPolygonService polygonService)
+        public MainViewGameViewModel(IRectangleService rectangleService)
         {
             Scale = 1;
-            _polygonService = polygonService;
+            _rectangleService = rectangleService;
             MousePressedCommand = new DelegateCommand<MouseButtonEventArgs>(MousePressed);
             MouseWheelCommand = new DelegateCommand<MouseWheelEventArgs>(MouseWheel);
             MouseMoveCommand = new DelegateCommand<MouseEventArgs>(MouseMove);
@@ -52,12 +52,9 @@ namespace GameOfLifeClient.Module.Game.ViewModels
             width -= width*Scale;
             height /= 2;
             width /= 2;
-            Polygons = _polygonService.AddPolygon((int)((pos.X-width-CenterX*Scale)/(10*Scale)),(int)((pos.Y-height-CenterY*Scale) / (10 * Scale)),0);
-            foreach (var polygon in Polygons)
-            {
-                Console.WriteLine(polygon.Points.ToString());
-            }
-            OnPropertyChanged(nameof(Polygons));
+            Rectangles = _rectangleService.AddRectangle((int)((pos.X-width-CenterX*Scale)/(10*Scale)),(int)((pos.Y-height-CenterY*Scale) / (10 * Scale)),0);
+            Console.WriteLine(Rectangles.Count);
+            OnPropertyChanged("Rectangles");
         }
 
         private void RightDown(MouseButtonEventArgs e)

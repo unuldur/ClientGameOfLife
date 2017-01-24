@@ -39,7 +39,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ItemsControl ItemsSource="{Binding Polygons}" Background="Black">
+        <ItemsControl ItemsSource="{Binding Rectangles}" Background="Black">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas RenderTransformOrigin="0.5,0.5">
@@ -52,9 +52,17 @@
                     </Canvas>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Left"
+                        Value="{Binding Origin.X}"/>
+                    <Setter Property="Canvas.Top"
+                        Value="{Binding Origin.Y}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Polygon Points="{Binding Points}" Fill="Gray" Stroke="Blue"></Polygon>
+                    <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Gray" Stroke="Blue"></Rectangle>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

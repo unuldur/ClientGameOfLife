@@ -7,8 +7,8 @@ using GameOfLifeClient.Module.Game.Modele;
 
 namespace GameOfLifeClient.Module.Game.Services
 {
-    public interface IPolygonService
+    public interface IRectangleService
     {
-        Polygons AddPolygon(int x, int y, int id);
+        Rectangles AddRectangle(int x, int y, int id);
     }
 }

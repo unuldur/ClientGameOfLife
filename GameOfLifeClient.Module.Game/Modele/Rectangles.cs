@@ -8,7 +8,7 @@ using GameOfLiFeClient.Modele;
 
 namespace GameOfLifeClient.Module.Game.Modele
 {
-    public class Polygons : ObservableCollection<Polygon>
+    public class Rectangles : ObservableCollection<Rectangle>
     {
     }
 }

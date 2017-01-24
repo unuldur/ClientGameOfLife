@@ -99,12 +99,12 @@
     <Compile Include="GameModule.cs" />
     <Compile Include="InteractiveCommand.cs" />
     <Compile Include="Modele\GridCells.cs" />
-    <Compile Include="Modele\Polygons.cs" />
+    <Compile Include="Modele\Rectangles.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\GridCellService.cs" />
     <Compile Include="Services\IGridCellService.cs" />
-    <Compile Include="Services\IPolygonService.cs" />
-    <Compile Include="Services\PolygonService.cs" />
+    <Compile Include="Services\IRectangleService.cs" />
+    <Compile Include="Services\RectangleService.cs" />
     <Compile Include="ViewModels\MainViewGameViewModel.cs" />
     <Compile Include="Views\MainViewGame.xaml.cs">
       <DependentUpon>MainViewGame.xaml</DependentUpon>
