@@ -15,6 +15,8 @@ namespace GameOfLiFeClient.Modele
         public bool Zone { get; private set; }
         public int Id { get; private set; }
 
+        public List<Rectangle> RectanglesTouche { get; private set; }
+
         public Rectangle(Point origin, int width, int height, bool zone, int id)
         {
             Origin = origin;
@@ -22,6 +24,7 @@ namespace GameOfLiFeClient.Modele
             Height = height;
             Zone = zone;
             Id = id;
+            RectanglesTouche = new List<Rectangle>();
         }
 
         public Rectangle(bool zone, int id)
@@ -33,13 +36,13 @@ namespace GameOfLiFeClient.Modele
         public bool Collision(Rectangle rec)
         {
             if (rec.Id != Id || rec.Zone != Zone) return false;
-            return ((rec.Origin.X >= Origin.X + Width) || (rec.Origin.X + rec.Width <= Origin.X) || (rec.Origin.Y >= Origin.Y + Height) || (rec.Origin.Y + rec.Height <= Origin.Y));
+            return !(rec.Origin.X > Origin.X + Width) && !(rec.Origin.X + rec.Width < Origin.X) && !(rec.Origin.Y > Origin.Y + Height) && !(rec.Origin.Y + rec.Height < Origin.Y);
         }
 
         public bool In(Rectangle rec)
         {
-            return rec.Origin.X >= Origin.X && rec.Origin.Y >= Origin.Y && rec.Origin.X + Width <= Origin.X + Width &&
-                   rec.Origin.Y + Height <= Origin.Y + Height;
+            return rec.Origin.X >= Origin.X && rec.Origin.Y >= Origin.Y && rec.Origin.X + rec.Width <= Origin.X + Width &&
+                   rec.Origin.Y + rec.Height <= Origin.Y + Height;
         }
 
         public bool CollisionPoint(Point p)

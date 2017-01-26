@@ -15,12 +15,25 @@ namespace GameOfLifeClient.Module.Game.Services
         public Rectangles AddRectangle(int x, int y, int id)
         {
             Rectangle rec = new Rectangle(new Point(x*10,y*10),10,10,false,id);
+            _grid = AjoutRec(_grid, rec);
+            return _grid;
+        }
+
+        private Rectangles AjoutRec(Rectangles recs,Rectangle rec)
+        {
             Rectangles rectangles = new Rectangles();
-            foreach (var rectangle in _grid)
+            bool addRec = true;
+            foreach (var rectangle in recs)
             {
                 bool res = rectangle.Collision(rec);
-                if (res && !rectangle.In(rec))
+                if (res && addRec)
                 {
+                    if (rectangle.In(rec))
+                    {
+                        addRec = false;
+                        rectangles.Add(rectangle);
+                        continue;
+                    }
                     Rectangle r = rectangle.Fuze(rec);
                     if (r == null)
                     {
@@ -28,19 +41,19 @@ namespace GameOfLifeClient.Module.Game.Services
                     }
                     else
                     {
-                        rectangles.Add(r);
-                        rec = r;
+                        rectangles = AjoutRec(rectangles, r);
+                        rec = rectangles[rectangles.Count - 1];
+                        addRec = false;
                     }
                 }
                 else
                 {
                     rectangles.Add(rectangle);
                 }
-                
+
             }
-            rectangles.Add(rec);
-            _grid = rectangles;
-            return _grid;
+            if (addRec) rectangles.Add(rec);
+            return rectangles;
         }
     }
 }
