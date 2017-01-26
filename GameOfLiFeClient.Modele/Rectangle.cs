@@ -60,13 +60,15 @@ namespace GameOfLiFeClient.Modele
             Rectangle[] rectangles= new Rectangle[2];
             if (horizontale)
             {
-                if(pos < Origin.Y || pos > Origin.Y+Height) return null;
-                rectangles[0] = new Rectangle(Origin, Width, Height / 2, Zone, Id);
-                rectangles[1] = new Rectangle(new Point(Origin.X, pos), Width, Height / 2, Zone, Id);
+                if(pos <= Origin.Y || pos >= Origin.Y+Height) return null;
+                rectangles[0] = new Rectangle(Origin, Width,(int)(pos - Origin.Y), Zone, Id);
+                rectangles[1] = new Rectangle(new Point(Origin.X, pos), Width, (int)(Origin.Y + Height - pos), Zone, Id);
             }
             else
             {
-                
+                if (pos <= Origin.X || pos >= Origin.X + Width) return null;
+                rectangles[0] = new Rectangle(Origin, (int)(pos - Origin.X), Height, Zone, Id);
+                rectangles[1] = new Rectangle(new Point(pos, Origin.Y), (int)(Origin.X + Width - pos), Height, Zone, Id);
             }
             return rectangles;
         } 
