@@ -15,44 +15,35 @@ namespace GameOfLifeClient.Module.Game.Services
         public Rectangles AddRectangle(int x, int y, int id)
         {
             Rectangle rec = new Rectangle(new Point(x*10,y*10),10,10,false,id);
-            _grid = AjoutRec(_grid, rec);
+            foreach (var rectangle in _grid)
+            {
+                if (rectangle.In(rec))
+                {
+                    return _grid;
+                }
+            }
+            _grid = AjoutRec(_grid,ref rec);
+            _grid.Add(rec);
             return _grid;
         }
 
-        private Rectangles AjoutRec(Rectangles recs,Rectangle rec)
+        private Rectangles AjoutRec(Rectangles recs, ref Rectangle rec)
         {
             Rectangles rectangles = new Rectangles();
-            bool addRec = true;
+            if (recs.Count == 0) return recs;
             foreach (var rectangle in recs)
             {
-                bool res = rectangle.Collision(rec);
-                if (res && addRec)
-                {
-                    if (rectangle.In(rec))
-                    {
-                        addRec = false;
-                        rectangles.Add(rectangle);
-                        continue;
-                    }
-                    Rectangle r = rectangle.Fuze(rec);
-                    if (r == null)
-                    {
-                        rectangles.Add(rectangle);
-                    }
-                    else
-                    {
-                        rectangles = AjoutRec(rectangles, r);
-                        rec = rectangles[rectangles.Count - 1];
-                        addRec = false;
-                    }
-                }
-                else
+                Rectangle r = rectangle.Fuze(rec);
+                if (r == null)
                 {
                     rectangles.Add(rectangle);
                 }
-
+                else
+                {
+                    rectangles = AjoutRec(rectangles,ref r);
+                    rec = r;       
+                }
             }
-            if (addRec) rectangles.Add(rec);
             return rectangles;
         }
     }
